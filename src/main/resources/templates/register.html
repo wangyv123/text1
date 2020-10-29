@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+    <center>
+        <h2>注册页面</h2>
+        <form th:action="@{/zhuce}" method="post">
+        用户名<input type="text" name="name"><span th:text="${chong}"></span><br>
+        密码<input type="text" name="paw"><br>
+        <input type="submit" value="提交">
+        </form>
+
+    </center>
+
+</body>
+</html>

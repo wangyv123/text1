@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+  <center>
+     <h2>展示页面</h2>
+      <form th:action="@{/show}" method="post" id="form">
+          姓名<input type="text" name="name" th:value="${s.name}"><br>
+          生日<input type="date" name="tou" th:value="${#dates.format(s.tou,'yyyy-MM-dd')}">--
+             <input type="date" name="wei" th:value="${#dates.format(s.wei,'yyyy-MM-dd')}"><br>
+          <input type="hidden" name="pageNum" id="pageNum">
+           <input type="submit" value="搜索">
+
+      </form>
+      <a th:href="@{/add}">添加</a>
+    <table border="1" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>班级</th>
+            <th>生日</th>
+            <th>操作</th>
+
+        </tr>
+
+        <tr th:each="s : ${page.list}">
+         <td th:text="${s.id}"></td>
+         <td th:text="${s.name}"></td>
+         <td th:if="${s.sex eq '1'}">男</td>
+         <td th:if="${s.sex eq '0'}">女</td>
+         <td th:text="${s.classc}"></td>
+         <td th:text="${#dates.format(s.birthday,'yyyy-MM-dd')}"></td>
+         <td>
+             <a th:href="@{/delete(id=(${s.id}))}">删除</a>
+             <a th:href="@{/selectid(id=(${s.id}))}">修改</a>
+         </td>
+
+        </tr>
+
+    </table>
+
+      <input type="button" value="首页" th:onclick="getpage(1)">
+      <input type="button" value="上一页" th:onclick="'getpage('+${page.prePage}+')'">
+      <input type="button" value="下一页" th:onclick="'getpage('+${page.nextPage}+')'">
+      <input type="button" value="尾页" th:onclick="'getpage('+${page.pages}+')'">
+
+  </center>
+
+
+</body>
+<script>
+
+    function getpage(pageNum) {
+
+
+        document.getElementById("pageNum").value=pageNum;
+        document.getElementById("form").submit();
+    }
+
+</script>
+
+</html>
