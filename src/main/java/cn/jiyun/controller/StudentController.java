@@ -147,4 +147,11 @@ public class StudentController {
        }
 
     }
+
+
+    public void abcd(){
+
+
+        System.out.println("123");
+    }
 }
