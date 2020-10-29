@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
@@ -125,21 +126,25 @@ public class StudentController {
     public String zhuce(Users u,Model model){
         String name = u.getName().trim();
 
-        Users uu = studentService.selectusername(name);
-        if(uu==null){
 
             studentService.adduser(u);
             return "login";
-        }else {
 
-            model.addAttribute("chong","用户名重复");
+    }
 
-            return "register";
-        }
+    @RequestMapping("/chongfu")
+    @ResponseBody
+    public String congfu(String name){
 
+        Users uu = studentService.selectusername(name);
 
+       if(uu==null){
 
+           return "ok";
+       }else {
 
+           return "no";
+       }
 
     }
 }

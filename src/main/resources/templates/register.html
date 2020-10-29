@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script th:src="@{/js/jquery-1.11.3.min.js}"></script>
 
 </head>
 <body>
@@ -10,12 +11,35 @@
     <center>
         <h2>注册页面</h2>
         <form th:action="@{/zhuce}" method="post">
-        用户名<input type="text" name="name"><span th:text="${chong}"></span><br>
+        用户名<input type="text" name="name" id="n"><span id="s"></span><br>
         密码<input type="text" name="paw"><br>
         <input type="submit" value="提交">
         </form>
 
     </center>
+ <script>
+     $("#n").blur(function(){
 
+         $.ajax({
+             url:"./chongfu",
+             type:"post",
+             data:{"name":$("#n").val()},
+             tatatype:"json",
+             success:function(data){
+
+                 if(data=="no"){
+
+                     $("#s").html('<font color="red">名称不能重复</font>');
+                 }else{
+                     $("#s").html('<font color="red">√</font>');
+
+                 }
+             }
+
+         });
+
+     });
+
+ </script>
 </body>
 </html>
